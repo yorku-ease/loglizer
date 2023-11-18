@@ -13,6 +13,7 @@ import numpy as np
 import re
 from sklearn.utils import shuffle
 from collections import OrderedDict
+from datetime import datetime
 
 def _split_data(x_data, y_data=None, train_ratio=0, split_type='uniform'):
     if split_type == 'uniform' and y_data is not None:
@@ -170,10 +171,16 @@ def load_OpenStack(log_file, label_file=None, window='session', train_ratio=0.5,
                 na_filter=False, memory_map=True)
         data_dict = OrderedDict()
         for idx, row in struct_log.iterrows():
-            datetime = re.search('(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})', row['Date'] + ' ' + row['Time']).group()
-            if not datetime in data_dict:
-                data_dict[datetime] = []
-            data_dict[datetime].append(row['EventId'])
+            datetime_string = re.search('(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})', row['Date'] + ' ' + row['Time']).group()
+            datetime_object = datetime.strptime(datetime_string, '%Y-%m-%d %H:%M:%S')
+            second = datetime_object.second
+            if second <= 30:
+                datetime_string = str(datetime_object.replace(second=0))
+            else:
+                datetime_string = str(datetime_object.replace(second=30))
+            if not datetime_string in data_dict:
+                data_dict[datetime_string] = []
+            data_dict[datetime_string].append(row['EventId'])
         data_df = pd.DataFrame(list(data_dict.items()), columns=['Datetime', 'EventSequence'])
         
         if label_file:
