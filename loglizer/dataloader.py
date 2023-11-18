@@ -183,6 +183,7 @@ def load_OpenStack(log_file, label_file=None, window='session', train_ratio=0.5,
             label_dict = label_data['Label'].to_dict()
             data_df['Label'] = data_df['Datetime'].apply(lambda x: 1 if label_dict[x] == 'Anomaly' else 0)
 
+
             # Split train and test data
             (x_train, y_train), (x_test, y_test) = _split_data(data_df['EventSequence'].values, 
                 data_df['Label'].values, train_ratio, split_type)
