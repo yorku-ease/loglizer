@@ -16,7 +16,7 @@ from ..utils import metrics
 
 class PCA(object):
 
-    def __init__(self, n_components=0.95, threshold=None, c_alpha=3.2905):
+    def __init__(self, n_components=0.82, threshold=None, c_alpha=3.2905):
         """ The PCA model for anomaly detection
 
         Attributes

@@ -29,7 +29,7 @@ class DecisionTree(object):
 
         """
         self.classifier = tree.DecisionTreeClassifier(criterion=criterion, max_depth=max_depth,
-                          max_features=max_features, class_weight=class_weight)
+                          max_features=max_features, class_weight=class_weight,random_state=2023)
 
     def fit(self, X, y):
         """

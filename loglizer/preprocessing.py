@@ -77,7 +77,6 @@ class FeatureExtractor(object):
         elif self.normalization == 'sigmoid':
             X[X != 0] = expit(X[X != 0])
         X_new = X
-        
         print('Train data shape: {}-by-{}\n'.format(X_new.shape[0], X_new.shape[1])) 
         return X_new
 

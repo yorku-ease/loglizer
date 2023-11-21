@@ -57,7 +57,7 @@ class IsolationForest(iForest):
             For more information, please visit https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html
         """
 
-        super(IsolationForest, self).__init__(n_estimators=n_estimators, max_samples=max_samples, 
+        super(IsolationForest, self).__init__(n_estimators=n_estimators, max_samples=max_samples,
             contamination=contamination, **kwargs)
 
 

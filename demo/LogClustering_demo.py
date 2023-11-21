@@ -6,17 +6,19 @@ sys.path.append('../')
 from loglizer.models import LogClustering
 from loglizer import dataloader, preprocessing
 
-struct_log = '../data/HDFS/HDFS_100k.log_structured.csv' # The structured log file
-label_file = '../data/HDFS/anomaly_label.csv' # The anomaly label file
-max_dist = 0.3 # the threshold to stop the clustering process
-anomaly_threshold = 0.3 # the threshold for anomaly detection
+
+struct_log = '../../log-anomaly-benchmark/OpenStack_structured/OpenStack_full.log_structured.csv' # The structured log file
+label_file = '../../log-anomaly-benchmark/processed/datetime.csv' # The anomaly label file
+max_dist = 0.8 # the threshold to stop the clustering process
+anomaly_threshold = 0.05 # the threshold for anomaly detection
 
 if __name__ == '__main__':
-    (x_train, y_train), (x_test, y_test) = dataloader.load_HDFS(struct_log,
+    (x_train, y_train), (x_test, y_test) = dataloader.load_OpenStack(struct_log,
                                                                 label_file=label_file,
                                                                 window='session', 
                                                                 train_ratio=0.5,
-                                                                split_type='uniform')
+                                                                split_type='uniform',
+                                                                normalize=True)
     feature_extractor = preprocessing.FeatureExtractor()
     x_train = feature_extractor.fit_transform(x_train, term_weighting='tf-idf')
     x_test = feature_extractor.transform(x_test)

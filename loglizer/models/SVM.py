@@ -30,7 +30,7 @@ class SVM(object):
 
         """
         self.classifier = svm.LinearSVC(penalty=penalty, tol=tol, C=C, dual=dual, 
-                                        class_weight=class_weight, max_iter=max_iter)
+                                        class_weight=class_weight, max_iter=max_iter, random_state=2023)
 
     def fit(self, X, y):
         """

@@ -17,9 +17,8 @@ window_size = 10
 epoches = 2
 num_workers = 2
 device = 0 
-
-struct_log = '../data/HDFS/HDFS_100k.log_structured.csv' # The structured log file
-label_file = '../data/HDFS/anomaly_label.csv' # The anomaly label file
+struct_log = '../../log-anomaly-benchmark/OpenStack_structured/OpenStack_full.log_structured.csv' # The structured log file
+label_file = '../../log-anomaly-benchmark/processed/datetime.csv' # The anomaly label file
 
 if __name__ == '__main__':
     (x_train, window_y_train, y_train), (x_test, window_y_test, y_test) = dataloader.load_HDFS(struct_log, label_file=label_file, window='session', window_size=window_size, train_ratio=train_ratio, split_type='uniform')
